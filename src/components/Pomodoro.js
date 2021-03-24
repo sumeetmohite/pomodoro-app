@@ -1,10 +1,9 @@
 import React,{useState, useEffect, useRef} from 'react';
 
-const Pomodoro = () => {
+const Pomodoro = ({btnColor}) => {
   const[status, setStatus] = useState(false);
   const[time, setTime]= useState('25:00');
   const[millis, setMillis]= useState(1500000);
-  const[cardBg, setCardBg]= useState('#e27474');
 
   const audio = new Audio('sounds/alarm_tone.mp3');
 
@@ -47,9 +46,9 @@ const Pomodoro = () => {
     return (
         <div className="pomodoro" style={{backgroundColor:'#e27474'}}>
             <h1>{time}</h1>
-            <button className="btn" onClick={()=>toggleStatus()}>{status ? 'Stop' : 'Start'}</button>
+            <button className="btn" style={{background:`${btnColor}`}} onClick={()=>toggleStatus()}>{status ? 'Stop' : 'Start'}</button>
       </div>
     )
 }
 
-export default Pomodoro
+export default Pomodoro;

@@ -1,6 +1,6 @@
 import React,{useState, useEffect, useRef} from 'react';
 
-const ShortBreak = () => {
+const ShortBreak = ({btnColor}) => {
     const[status, setStatus] = useState(false);
   const[time, setTime]= useState('5:00');
   const[millis, setMillis]= useState(300000);
@@ -44,12 +44,12 @@ const ShortBreak = () => {
     timerHandler();
   },[status]);
     return (
-        <div className="pomodoro" style={{backgroundColor:'#74d361'}}>
+        <div className="pomodoro" style={{backgroundColor:'#30a1f2'}}>
             <h1>{time}</h1>
-            <button className="btn" onClick={()=>toggleStatus()}>{status ? 'Stop' : 'Start'}</button>
+            <button className="btn" style={{background:`${btnColor}`}} onClick={()=>toggleStatus()}>{status ? 'Stop' : 'Start'}</button>
       </div>
     )
 
 }
 
-export default ShortBreak
+export default ShortBreak;
