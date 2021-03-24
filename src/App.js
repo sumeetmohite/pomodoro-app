@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import './App.scss';
+import {Link,BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Pomodoro from './components/Pomodoro';
+import ShortBreak from './components/ShortBreak';
+import LongBreak from './components/LongBreak';
 
-function App() {
+const App = () => {
   return (
+    <Router>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="widget-container">
+      <button className='link-btn'><Link to='/'>Pomodoro</Link></button>
+      <button className='link-btn'><Link to='/shortBreak'>Short Break</Link></button>
+      <button className='link-btn'><Link to='/longBreak'>Long Break</Link></button>
+      
+      <Switch>
+        <Route exact path='/'>
+          <Pomodoro/>
+        </Route>
+          
+        <Route path='/shortBreak'>
+          
+          <ShortBreak/>
+        </Route>
+
+        <Route path='/longBreak'>
+          <LongBreak/>
+        </Route>
+      </Switch>
+      </div>
     </div>
+    </Router>
   );
 }
 
