@@ -1,6 +1,6 @@
 import React,{useState, useEffect, useRef} from 'react';
 
-const LongBreak = ({btnColor}) => {
+const LongBreak = ({btnColor,cardBg}) => {
   const[status, setStatus] = useState(false);
   const[time, setTime]= useState('15:00');
   const[millis, setMillis]= useState(900000);
@@ -44,7 +44,7 @@ const LongBreak = ({btnColor}) => {
     timerHandler();
   },[status]);
     return (
-        <div className="pomodoro" style={{backgroundColor:'#6c6ea8'}}>
+        <div className="pomodoro" style={{backgroundColor:`${cardBg}`}}>
             <h1>{time}</h1>
             <button className="btn" style={{background:`${btnColor}`}} onClick={()=>toggleStatus()}>{status ? 'Stop' : 'Start'}</button>
       </div>
