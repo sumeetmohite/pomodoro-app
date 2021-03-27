@@ -29,9 +29,16 @@ h2{
     font-size: 3rem;
     color:#fff;
 }
-@media (max-width: 650px){
-    .pomodoro{
-        width:75%;
+.widget-container{
+    width:60%;
+    margin:auto;
+    border-radius:1rem;
+    padding-top:2rem;
+    padding-bottom:10px;
+}
+@media only screen and(max-width: 650px){
+    .widget-container{
+        width:85%;
     }
 }
 
@@ -40,6 +47,7 @@ h2{
     font-family: 'Poppins', sans-serif;
     color:white;
     width:fit-content;
+    padding:0 10px 0 10px;
     margin-bottom: 20px;
     border-radius:5px;
     font-size:2rem;
@@ -53,18 +61,15 @@ h2{
     border-radius:5px;
     font-size:1.5rem;
     margin:5px 5px 5px 5px;
-    a{
-        text-decoration: none;
-        font-family: 'Poppins', sans-serif;
-        color:#fff;
-        &:hover{
+    padding: 5px 10px 5px 10px;
+    font-family: 'Poppins', sans-serif;
+    color:#fff;
+      &:hover{
             color:rgb(211, 211, 211);
+            border-radius:10px;
         }
-    }
-    &:hover{
-        border-radius:5px;
-    }
 }
+
 .header{
     border:none;
     height:20%;
