@@ -86,29 +86,39 @@ const App = () => {
   const resetHandler = () => {
     setStatus('Start');
     clearInterval(intervalRef.current);
-    setTime('25:00');
-    setMillis(1500000);
+    if(cardBg === '#d36b6b'){
+      setTime('25:00');
+      setMillis(1500000);
+    }
+    else if(cardBg === '#8688ba'){
+      setTime('5:00');
+      setMillis(300000);
+    }
+    else if(cardBg === '#69b4ae'){
+      setTime('15:00');
+      setMillis(900000);
+    }
+    
   }
 
 
   return (
     
-    <motion.div className="App" style={{backgroundColor:`${bgColor}`}}>
+    <motion.div className="App" style={{backgroundColor:`${bgColor}`}} >
       <div className='header'><motion.h2 initial={{y:-200}} animate={{y:0}}>Pomodoro Timer</motion.h2></div>
-      <div className="widget-container" style={{background:`${cardBg}`}}>
+      <motion.div className="widget-container" style={{background:`${cardBg}`}}
+      initial={{y:-200}} animate={{y:0}}>
         <button className='link-btn' onClick={()=>{changeCardHandler(1)}} style={btnStyle}>Pomodoro</button>
         <button className='link-btn' onClick={()=>{changeCardHandler(2)}} style={btnStyle}>Short Break</button>
         <button className='link-btn' onClick={()=>{changeCardHandler(3)}} style={btnStyle}>Long Break</button>
 
-          <motion.div className="pomodoro" style={{backgroundColor:`${cardBg}`}}
-          
-          >
+          <div className="pomodoro" style={{backgroundColor:`${cardBg}`}}>
             <h1>{time}</h1>
             <button className="btn" style={{background:`${btnColor}`}} onClick={()=>toggleStatus()}>{status}</button>
             <button className="btn" style={{background:`${btnColor}`}} onClick={()=> resetHandler()}>Reset</button>
-          </motion.div>
+          </div>
 
-      </div>
+      </motion.div>
     </motion.div>
   );
 }
