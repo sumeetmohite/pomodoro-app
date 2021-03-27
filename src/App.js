@@ -1,4 +1,5 @@
-import React,{useState, useEffect, useRef} from 'react';
+import React,{useState, useRef} from 'react';
+import {motion} from 'framer-motion';
 import './App.scss';
 
 const App = () => {
@@ -6,7 +7,7 @@ const App = () => {
   const[btnColor,setBtnColor] = useState('#c44c4c');
   const[cardBg,setCardBg] = useState('#d36b6b');
 
-  const[status, setStatus] = useState(false);
+  const[status, setStatus] = useState('Start');
   const[time, setTime] = useState('25:00');
   const[millis, setMillis] = useState(1500000);
 
@@ -23,12 +24,20 @@ const App = () => {
   return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
   }
 
-  const toggleStatus = () => setStatus((prevStatus) => !prevStatus);
+  const toggleStatus = () => {
+    if(status === 'Start'){
+      setStatus('Stop')
+    }
+    if(status === 'Stop'){
+      setStatus('Start')
+    }
+    timerHandler();
+  }
 
   const intervalRef = useRef();
 
   const timerHandler = () => {
-    if(status){ 
+    if(status === 'Start'){ 
       let temp = millis;
       if(millis)
       intervalRef.current = setInterval(function(){
@@ -38,22 +47,19 @@ const App = () => {
         }
         temp = temp - 1000;
         setMillis(temp);
-        setTime(convert(temp));
-        console.log(temp, time);
-        
+        setTime(convert(temp));        
       },1000)
     }
-    if(!status){
-      clearInterval(intervalRef.current);    
+    if(status === 'Stop'){
+      clearInterval(intervalRef.current);
+      console.log(time, millis);
     }  
   }
   
-  useEffect(()=>{
-    timerHandler();
-  },[status]);
 
   const changeCardHandler = (cardnum) => {
     clearInterval(intervalRef.current);
+    setStatus('Start')
     if(cardnum === 1){
       setTime('25:00');
       setMillis(1500000);
@@ -77,29 +83,33 @@ const App = () => {
     }
   }
 
-  /*const resetHandler = () => {
+  const resetHandler = () => {
+    setStatus('Start');
     clearInterval(intervalRef.current);
     setTime('25:00');
     setMillis(1500000);
-  }*/
+  }
 
 
   return (
     
-    <div className="App" style={{backgroundColor:`${bgColor}`}}>
-      <div className='header'><h2>Pomodoro Timer</h2></div>
+    <motion.div className="App" style={{backgroundColor:`${bgColor}`}}>
+      <div className='header'><motion.h2 initial={{y:-200}} animate={{y:0}}>Pomodoro Timer</motion.h2></div>
       <div className="widget-container" style={{background:`${cardBg}`}}>
         <button className='link-btn' onClick={()=>{changeCardHandler(1)}} style={btnStyle}>Pomodoro</button>
         <button className='link-btn' onClick={()=>{changeCardHandler(2)}} style={btnStyle}>Short Break</button>
         <button className='link-btn' onClick={()=>{changeCardHandler(3)}} style={btnStyle}>Long Break</button>
 
-          <div className="pomodoro" style={{backgroundColor:`${cardBg}`}}>
+          <motion.div className="pomodoro" style={{backgroundColor:`${cardBg}`}}
+          
+          >
             <h1>{time}</h1>
-            <button className="btn" style={{background:`${btnColor}`}} onClick={()=>toggleStatus()}>{status ? 'Stop' : 'Start'}</button>
-          </div>
+            <button className="btn" style={{background:`${btnColor}`}} onClick={()=>toggleStatus()}>{status}</button>
+            <button className="btn" style={{background:`${btnColor}`}} onClick={()=> resetHandler()}>Reset</button>
+          </motion.div>
 
       </div>
-    </div>
+    </motion.div>
   );
 }
 
