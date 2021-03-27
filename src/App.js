@@ -114,8 +114,10 @@ const App = () => {
 
           <div className="pomodoro" style={{backgroundColor:`${cardBg}`}}>
             <h1>{time}</h1>
-            <button className="btn" style={{background:`${btnColor}`}} onClick={()=>toggleStatus()}>{status}</button>
-            <button className="btn" style={{background:`${btnColor}`}} onClick={()=> resetHandler()}>Reset</button>
+            <div className='button-container'>
+              <button className="btn" style={{background:`${btnColor}`}} onClick={()=>toggleStatus()}>{status}</button>
+              <button className="btn" style={{background:`${btnColor}`}} onClick={()=> resetHandler()}>Reset</button>
+            </div>
           </div>
 
       </motion.div>
